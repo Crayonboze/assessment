@@ -15,14 +15,28 @@ assessmentButton.addEventListener(
 
     // 診断結果表示エリアの作成
     resultDivision.innerText = '';
-    const heading = document.createElement('h3');
-    heading.innerText = '診断結果';
-    resultDivision.appendChild(heading);
+
+    //headerDivision の作成
+    const headerDivision = document.createElement('div');
+    headerDivision.setAttribute('class','card-header text-bg-primary');
+    headerDivision.innerText = '診断結果'
+
+    //bodyDIvision の作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class','card-body');
 
     const paragraph = document.createElement('p');
+    paragraph.setAttribute('class','card-text');
     const result = assessment(userName);
     paragraph.innerText = result;
-    resultDivision.appendChild(paragraph);
+    bodyDivision.appendChild(paragraph);
+    
+    //resultDivision　に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute('class','card')
+
+    //headerDivisionとbodyDivisionをresultDivisionに差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
 
     // ツイートエリアの作成
     tweetDivision.innerText = '';
@@ -140,6 +154,14 @@ function test() {
 
   console.log('花子');
   console.assert(
+    assessment('花子') === assessment('花子'),
+    '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
+  )
+
+  console.log('同じ名前なら、同じ結果を出力することのテスト終了');
+}
+
+test();
     assessment('花子') === assessment('花子'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
   )
